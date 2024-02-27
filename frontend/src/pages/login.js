@@ -1,5 +1,6 @@
 import React, { useState } from 'react';    
 
+// TODO: give styling
 export default function Login() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -10,27 +11,29 @@ export default function Login() {
         setError(null);
 
         try {
-            const formData = new FormData(event.currentTarget);
-            const response = await fetch('/api/submit', {
-                method: 'POST',
-                body: formData
-            })
+            const formData = new FormData(event.target);
 
-            if (!response.ok) {
-                throw new Error('Failed to submit the data. Please try again!');
-            }
+            console.log(formData.get("remember"));
 
-            const data = await response.json();
-            // handle response
+            // Fetch data
+            // TODO: change the api
+            // const response = await fetch('/api/submit', {
+            //     method: 'POST',
+            //     body: formData
+            // })
+
+            // if (!response.ok) {
+            //     throw new Error('Failed to submit the data. Please try again!');
+            // }
+
+            // Handle Response
+            // const data = await response.json();
         } catch(error) {
-            setError(error.message)
-            console.error(error)
+            setError(error.message);
+            console.error(error);
         } finally {
             setIsLoading(false);
         }
-
-        console.log("Submit");
-        console.log(event)
     }
 
     return (
@@ -38,11 +41,15 @@ export default function Login() {
             <h1>Login</h1>
             <form onSubmit={onSubmit}>
                 <label for="email">Email</label> <br/>
-                <input type="text" id="email" name="Email" /> <br/>
+                <input type="text" id="email" name="email" /> <br/>
+                
                 <label for="password">Password</label> <br/>
-                <input type="text" id="password" name="Password" /><br/>
+                <input type="text" id="password" name="password" /> <br/>
+                
+                <input type="checkbox" id="remember" name="remember" />
+                <label for="remember">Remember me</label> <br/>
                 <button type="submit" disabled={isLoading}>
-                    {isLoading ? "Loading..." : "Submit"}
+                    Login
                 </button>   
             </form>
         </div>
