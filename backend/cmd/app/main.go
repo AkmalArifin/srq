@@ -1,21 +1,16 @@
 package main
 
 import (
+	"example/srq/backend/internal/app"
 	"example/srq/backend/internal/config"
-
-	"github.com/gin-gonic/gin"
+	"example/srq/backend/internal/database"
 )
 
 func init() {
 	config.GetEnvVariables()
+	database.ConnectDatabase()
 }
 
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run()
+	app.App()
 }

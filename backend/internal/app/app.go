@@ -1,8 +1,16 @@
 package app
 
-import "fmt"
+import (
+	"example/srq/backend/internal/transport/rest"
 
-func PrintHello(name string) string {
-	message := fmt.Sprintf("Hi, %v. Welcome", name)
-	return message
+	"github.com/gin-gonic/gin"
+)
+
+// run all programs
+func App() {
+	r := gin.Default()
+
+	r.GET("/", rest.Ping)
+
+	r.Run()
 }
