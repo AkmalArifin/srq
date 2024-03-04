@@ -15,19 +15,24 @@ export default function Login() {
 
             console.log(formData.get("remember"));
 
+            const reponse = await fetch('http://localhost:3001/', {
+                method: 'GET',
+            })
+
             // Fetch data
             // TODO: change the api
-            // const response = await fetch('/api/submit', {
+            // const response = await fetch('http://localhost:3031/login', {
             //     method: 'POST',
             //     body: formData
             // })
 
-            // if (!response.ok) {
-            //     throw new Error('Failed to submit the data. Please try again!');
-            // }
+            if (!response.ok) {
+                throw new Error('Failed to submit the data. Please try again!');
+            }
 
             // Handle Response
-            // const data = await response.json();
+            const data = await response.json();
+            console.log(data)
         } catch(error) {
             setError(error.message);
             console.error(error);
